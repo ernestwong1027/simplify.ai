@@ -17,29 +17,27 @@ const FileUploader = ({ loading, setLoading }) => {
   const handleChange = async (event) => {
     try {
       setLoading(true);
+      let formData = new FormData();
+      formData.append('file', event.target.files[0]);
 
-      const result1 = await fetch('http://ernestw.com:5000/submit', {
+      const result1 = await fetch('http://localhost:5000/submit', {
         method: 'POST',
-        body: event.target.files[0],
+        body: formData,
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
       });
 
       const data = await result1.json();
+      let filename = data.filename.split('.')[0];
 
-      console.log(data);
-      if (data.filename) {
-        const result2 = await fetch(
-          `http://ernestw.com:5000/file/${data.filename}`
-        );
+      const result2 = await fetch(`http://localhost:5000/file/${filename}`);
 
-        if (result2.statusCode === 200) {
-          // todo: get specific attribute of data
-          const url = window.URL.createObjectURL(data);
-          setDownloadHref(url);
-        }
-      }
+      let file = await result2.blob();
+      const url = window.URL.createObjectURL(file);
+      console.log(url);
+      setDownloadHref(url);
+
       setLoading(false);
     } catch (err) {
       console.log(err);

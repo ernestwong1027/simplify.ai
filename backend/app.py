@@ -2,9 +2,10 @@ import os
 from os import path
 from flask import Flask, flash, request, redirect, url_for, send_from_directory
 import uuid
-
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
