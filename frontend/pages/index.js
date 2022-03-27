@@ -1,6 +1,5 @@
-import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
+import React from 'react';
+
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 
@@ -14,7 +13,6 @@ const navigation = [
 export default function Home() {
   return (
     <>
-      <Navbar />
       <Hero />
     </>
   );
