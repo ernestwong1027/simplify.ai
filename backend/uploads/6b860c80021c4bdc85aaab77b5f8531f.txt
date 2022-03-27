@@ -1,0 +1,25 @@
+                                                                   Cash Budget
+                                                   Jan, Feb, Mar, Apr, May, June 2022
+
+                                               Jan             Feb            Mar          Apr           May            June
+Beg. Cash Balance               5000          3000          3000       3000         3000           3000
+Add: Cash Receipts             5400          12000        14700     18000      18900         22700
+Total                                    10400        15000         17700     21000     21900          25700
+
+Less: Purchase Disburs.       1584          2640          3432       3696         3960           5192
+Payroll                                  8400          8400          8400       8400         8400           8400
+Utilities                                 500            500             500          500           500             500
+Insurance                              375             375             375         375           375             375
+Interest                                                      45               57           59               46               29
+Website                                 125             125            125          125           125             125
+Business License                   300
+Equipment Lease                  2200          2200           2200      2200         2200            2200
+Startup Costs                        3000
+Total Disbursements            16484       14285         15089    15355       15606          16821
+
+Cash Excess/(Deffi.)             (6084)         715            2611      5645         6294            8879
+Min. Cash Balance Desir.      3000          3000          3000      3000          3000           3000
+Financing Required               9084          2285          389        
+Surplus Cash                                                                              2645         3294           5879
+Financing Repaid                                                                       2645         3294           5819
+Ending Cash Balance            3000          3000           3000      3000          3000          3060
