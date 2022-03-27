@@ -1,0 +1,32 @@
+Metadata-Version: 2.1
+Name: zict
+Version: 2.1.0
+Summary: Mutable mapping tools
+Home-page: http://zict.readthedocs.io/en/latest/
+Maintainer: Matthew Rocklin
+Maintainer-email: mrocklin@gmail.com
+License: BSD
+Keywords: mutable mapping,dict,dask
+Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+License-File: LICENSE.txt
+Requires-Dist: heapdict
+
+Zict
+====
+
+|Build Status| |Linting|
+
+Mutable Mapping interfaces.  See documentation_.
+
+.. _documentation: http://zict.readthedocs.io/en/latest/
+.. |Build Status| image:: https://github.com/dask/zict/actions/workflows/test.yml/badge.svg
+   :target: https://github.com/dask/zict/actions/workflows/test.yml
+.. |Linting| image:: https://github.com/dask/zict/actions/workflows/pre-commit.yml/badge.svg
+   :target: https://github.com/dask/zict/actions/workflows/pre-commit.yml
+
+

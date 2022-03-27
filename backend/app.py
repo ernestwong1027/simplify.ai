@@ -31,13 +31,12 @@ def submit_file():
 @app.route('/file/<filename>', methods=['GET'])
 def download_file(filename):
     filename = filename+'.txt'
-    if path.exists('../uploads/' + filename):
+    if path.exists('uploads/' + filename):
         return send_from_directory(app.config["UPLOAD_FOLDER"], filename)
     return "Invalid File", 400
 
-
 #Check if file type is allowed
-ALLOWED_EXTENSIONS = {'txt', 'wav','docx'}
+ALLOWED_EXTENSIONS = {'txt', 'wav'}
 
 
 def allowed_file(filename):
