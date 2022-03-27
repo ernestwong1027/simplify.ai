@@ -1,12 +1,11 @@
 import React, { useRef, useState } from 'react';
 // Style the Button component
 
-const FileUploader = (props) => {
+const FileUploader = ({ loading, setLoading }) => {
   // Create a reference to the hidden file input element
   const hiddenFileInput = useRef(null);
   const downloadButton = useRef(null);
 
-  const [loading, setLoading] = useState(false);
   const [downloadHref, setDownloadHref] = useState('');
 
   // Programatically click the hidden file input element
@@ -18,13 +17,10 @@ const FileUploader = (props) => {
   const handleChange = async (event) => {
     try {
       setLoading(true);
-      const body = {
-        file: event.target.files[0],
-      };
 
-      const result1 = await fetch('https://ernestw.com:5000/submit', {
+      const result1 = await fetch('http://ernestw.com:5000/submit', {
         method: 'POST',
-        body,
+        body: event.target.files[0],
         headers: {
           'Access-Control-Allow-Origin': '*',
         },
@@ -32,9 +28,10 @@ const FileUploader = (props) => {
 
       const data = await result1.json();
 
+      console.log(data);
       if (data.filename) {
         const result2 = await fetch(
-          `https://ernestw.com:5000/file/${data.filename}`
+          `http://ernestw.com:5000/file/${data.filename}`
         );
 
         if (result2.statusCode === 200) {

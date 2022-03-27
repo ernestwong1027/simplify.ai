@@ -1,9 +1,6 @@
 import React from 'react';
 import * as Scroll from 'react-scroll';
 import { Link, Element } from 'react-scroll';
-
-import Navbar from '../components/Navbar';
-
 const How = () => {
   return (
     <>
@@ -14,7 +11,7 @@ const How = () => {
               Summarizes your lectures
             </h1>
             <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-500s">
-              Baddie.ai is a free open-source web app that takes in lecture
+              Simplify.ai is a free open-source web app that takes in lecture
               recordings as inputs and outputs their summaries. Simply drag and
               drop your audio file or find it from your computer, and your
               summary will generate very shortly.

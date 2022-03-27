@@ -1,23 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FileUploader from '../components/FileUploader';
 
-import Navbar from '../components/Navbar';
-
 const Dashboard = () => {
+  const [loadingPercentage, setLoadingPercentage] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (loadingPercentage >= 100) {
+      setLoading(false);
+      return;
+    }
+    if (loadingPercentage >= 80) {
+      setTimeout(() => {
+        setLoadingPercentage(loadingPercentage + 1);
+      }, 200);
+    } else if (loadingPercentage >= 70) {
+      setTimeout(() => {
+        setLoadingPercentage(loadingPercentage + 1);
+      }, 400);
+    } else if (loadingPercentage >= 20) {
+      setTimeout(() => {
+        setLoadingPercentage(loadingPercentage + 1);
+      }, 800);
+    } else {
+      setTimeout(() => {
+        setLoadingPercentage(loadingPercentage + 1);
+      }, 1500);
+    }
+  }, [loadingPercentage]);
   return (
     <section className="text-gray-600 body-font">
       <div className="container px-5 py-24 mx-auto">
         <div className="flex flex-col text-center w-full mb-8">
           <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
-            Baddie dashboard
+            Simplify.ai dashboard
           </h1>
           <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
             Upload your lecture audio here as a .wav file
           </p>
+          <div className="w-[50%] mx-auto  rounded-full dark:bg-gray-700 mt-12">
+            {loading && loadingPercentage < 100 && (
+              <div
+                className="bg-blue-600 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full"
+                style={{ width: `${loadingPercentage}%` }}
+              ></div>
+            )}
+            {loadingPercentage === 100 && <p>Done!</p>}
+            {/* <p>{loadingPercentage}%</p> */}
+          </div>
         </div>
         <div className="flex flex-row justify-center mb-24">
           {' '}
-          <FileUploader />
+          <FileUploader loading={loading} setLoading={setLoading} />
         </div>
         <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900"></h1>
         <div className="flex flex-wrap -m-4 text-center">
@@ -37,9 +71,9 @@ const Dashboard = () => {
                 <path d="M23 21v-2a4 4 0 00-3-3.87m-4-12a4 4 0 010 7.75"></path>
               </svg>
               <h2 className="title-font font-medium text-3xl text-gray-900">
-                1.3K
+                4
               </h2>
-              <p className="leading-relaxed">Users</p>
+              <p className="leading-relaxed">Active Users</p>
             </div>
           </div>
           <div className="p-4 md:w-1/4 sm:w-1/2 w-full">
@@ -57,7 +91,7 @@ const Dashboard = () => {
                 <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
               </svg>
               <h2 className="title-font font-medium text-3xl text-gray-900">
-                7,613
+                3
               </h2>
               <p className="leading-relaxed">Lectures summarized</p>
             </div>
@@ -76,7 +110,7 @@ const Dashboard = () => {
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
               </svg>
               <h2 className="title-font font-medium text-3xl text-gray-900">
-                93%
+                96%
               </h2>
               <p className="leading-relaxed">Accuracy</p>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import Link from 'next/link';
+
 const Navbar = () => {
   return (
     <header className="text-gray-600 body-font">
@@ -18,7 +18,7 @@ const Navbar = () => {
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
           </svg>
-          <span className="ml-3 text-xl">Baddie Summarizer</span>
+          <span className="ml-3 text-xl">Simplify.ai Summarizer</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
           <Link href="/">
