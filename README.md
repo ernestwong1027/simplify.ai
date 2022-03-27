@@ -4,11 +4,7 @@ A free, open-source web app that takes in lecture recordings as inputs and outpu
 
 ## How we built it
 
-We built it using natural language processing models, specifically the Silero speech-to-text model and the Pegasus abstractive summarization model. The primary library we used was PyTorch. For the backend, we used Flask and hosted it on AWS. For the frontend, we used Next.js.
-
-## Challenges we ran into
-
-We adopted a fairly high-level approach to abstractive summarization and speech to text conversion. Although this was not our original plan, it allowed us to spend more time on adding our own components to the pipeline to improve the quality of our output, as well as set up our web application. 
+Our pipeline is in `\model class sets`. We built it using natural language processing models, specifically the Silero speech-to-text model and the Pegasus abstractive summarization model, and added additional scripts to add punctionuation, enhance audio quality, and finetune our summarization model.
 
 ## What we learned
 
@@ -16,7 +12,7 @@ We adopted a fairly high-level approach to abstractive summarization and speech 
 - The differences between Automatic Speech Recognition and Speech To Text models 
 - Creating machine learning pipelines and transforming them into products
 
-## What's next for simplify.ai
+## What's next
 
 - Explore pricing plans + enterprise usage
 - Adding a sentiment analysis feature to rate lecture quality in terms of engagement, tone, and impact
