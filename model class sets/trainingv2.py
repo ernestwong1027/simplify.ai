@@ -3,10 +3,11 @@ import torch
 
 #TODO: Test training with vm
 
-class Dataset(torch.utils.data.Dataset):
-    def __init__(self, encodings, labels):
+class UserDataset(torch.utils.data.Dataset):
+    def __init__(self, encodings, labels, logger):
         self.encodings = encodings
         self.labels = labels
+        self.logger = logging.getLogger("Pegasus Encoder Logger")
     def __get__(self, idx):
         item = {key: torch.tensor(val[idx]) for key, val in self.encodings.items()}
         item['labels'] = torch.tensor(self.labels['input_ids'][idx])
@@ -14,6 +15,9 @@ class Dataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.labels['input_ids'])
 
+"""
+Format and tokenize training dataset
+"""
       
 def prepare_data(model_name, train_texts, train_labels, val_texts=None, val_labels=None, test_texts=None, test_labels=None):
 
@@ -25,7 +29,7 @@ def prepare_data(model_name, train_texts, train_labels, val_texts=None, val_labe
     def tokenize_data(texts, labels):
         encodings = tokenizer(texts, truncation=True, padding=True)
         decodings = tokenizer(labels, truncation=True, padding=True)
-        dataset_tokenized = Dataset(encodings, decodings)
+        dataset_tokenized = UserDataset(encodings, decodings, logger)
         return dataset_tokenized
 
     train_dataset = tokenize_data(train_texts, train_labels)
@@ -34,7 +38,9 @@ def prepare_data(model_name, train_texts, train_labels, val_texts=None, val_labe
 
     return train_dataset, val_dataset, test_dataset, tokenizer
 
-
+"""
+Params include output directory, total number of trainig epochs, batch sieze, batch size increase, strength of weight decay, directory for storing logs
+"""
 def init_fine_tuning(model_name, tokenizer, train_dataset, val_dataset=None, freeze_encoder=False, output_dir='./results'):
  
   torch_device = 'cuda' if torch.cuda.is_available() else 'cpu'
@@ -60,6 +66,9 @@ def init_fine_tuning(model_name, tokenizer, train_dataset, val_dataset=None, fre
       logging_steps=10,
     )
 
+    """
+    This function allows for the training and evaluation dataset to be passed through as parameters.  Allows instantiated model to be trained
+    """
     trainer = Trainer(
       model=model,                        
       args=training_args,                 
@@ -67,6 +76,10 @@ def init_fine_tuning(model_name, tokenizer, train_dataset, val_dataset=None, fre
       eval_dataset=val_dataset,          
       tokenizer=tokenizer
     )
+
+    """
+    used if evaluatin strategy isn't feasible
+    """
 
   else:
     training_args = TrainingArguments(
@@ -89,5 +102,25 @@ def init_fine_tuning(model_name, tokenizer, train_dataset, val_dataset=None, fre
     )
 
   return trainer
+
+if __name__=='__main__':
+  from datasets import load_dataset # samsum dataset used for example case
+  
+  try:
+    dataset = load_dataset("samsum")
+    train_texts, train_labels = dataset['train']['dialogue'][:1000], dataset['train']['summary'][:1000]
+
+    model_name = 'google/pegasus-xsum' # X-Sum model for abstractive sum
+    train_dataset, _, _, tokenizer = prepare_data(model_name, train_texts, train_labels)
+    trainer = init_fine_tuning(model_name, tokenizer, train_dataset)
+    trainer.train()
+
+    except Exception as training_exception:
+
+        raise training_exception("Issue occured while attempting to train the model")  # Find out how to add raised error to logs.  No log objects currently exposed
+       
+
+       
+      
 
 
